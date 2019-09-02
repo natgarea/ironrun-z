@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css"/>
+</head>
+<body>
+    <script>
+        const n = 20; //number of images
+        const w = 521 * .36; // width
+        const h = 576 * .36; // height
+        let theHTML = "";
+        function createSpriteSheet (n, w, h) {
+            for (let i = 1; i <= n; i++) {
+                theHTML += `<img src="img/enemy/female/Walk_(${i}).png" width="${w}"
+                height="${h}" />`
+            }
+        }
+        createSpriteSheet(n,w,h);
+        document.querySelector("body").innerHTML= theHTML;
+        document.body.style.backgroundColor = "white";
+        </script>
+</body>
+</html>
