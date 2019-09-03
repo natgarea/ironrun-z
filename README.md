@@ -3,6 +3,10 @@ Endless running side-scroll game in which a zombie horde follows right after you
 ## Game Controls
 * **Esc**: pause the game.
 * **Enter**: continue playing after a pause.
+## Biggest challenge
+## Improvements needed
+## Proud moment
+## If I started again...
 ## Credits
 * Background images from [MobileGameGraphics](https://mobilegamegraphics.com/)
 * Sprites from [GameArt2D](https://www.gameart2d.com/)
