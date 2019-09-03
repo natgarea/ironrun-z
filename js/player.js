@@ -1,25 +1,24 @@
 class Player {
-  constructor(w, h, ctx, keys) {
+  constructor(w, h, ctx) {
     this.canvasW = w;
     this.canvasH = h;
     this.ctx = ctx;
-    this.keys = keys;
     this.x = this.canvasW * 0.35;
     this.y0 = this.canvasH * 0.56;
     this.y = this.y0;
+    this.vy = 1;
 
     // TODO
     // habría que pasarlo ${character}
-    // para que sepa si elige chica o chico 
+    // para que sepa si elige chica o chico
     this.img = new Image();
-    this.img.src= "img/player/female/run.png";
+    this.img.src = "img/player/female/run.png";
 
     this.img.frames = 20;
     this.img.frameIndex = 0;
 
     this.w = 160;
     this.h = 175;
-
   }
 
   draw(framesCounter) {
@@ -35,42 +34,37 @@ class Player {
       this.h
     );
 
-      this.animateImg(framesCounter);
+    this.animateImg(framesCounter);
+  }
+
+  animateImg(framesCounter) {
+    // se va cambiando el frame. Cuanto mayor es el módulo, mas lento se mueve el personaje
+    if (framesCounter % 3 === 0) {
+      this.img.frameIndex += 1;
+
+      // Si el frame es el último, se vuelve al primero
+      if (this.img.frameIndex >= 20) this.img.frameIndex = 0;
     }
+  }
 
-    // setListeners() {
-    //   window.onkeydown = function(e) {
-    //     if (e.keyCode === 32 && this.y == this.y0) {
-    //       console.log("Recibido")
-    //       this.y -= 5;
-    //       this.vy -= 10;
-    //     }
-    //   }.apply(this);
-    // }
-
-    animateImg(framesCounter) {
-      // se va cambiando el frame. Cuanto mayor es el módulo, mas lento se mueve el personaje
-      if (framesCounter % 3 === 0) {
-        this.img.frameIndex += 1;
-  
-        // Si el frame es el último, se vuelve al primero
-        if (this.img.frameIndex >= 20) this.img.frameIndex = 0;
-      }
+  jump() {
+    if (this.y == this.y0) {
+    this.y -= 5;
+    this.vy -= 10;
     }
+  }
 
-    move() {
-      // Aumenta la velocidad en el eje y.
-      var gravity = 0.4;
-  
-      // solo salta cuando el personaje está en el suelo
-      if (this.y >= this.y0) {
-        this.vy = 1;
-        this.y = this.y0;
-      } else {
-        this.vy += gravity;
-        this.y += this.vy;
-      }
+  move() {
+    // Aumenta la velocidad en el eje y.
+    var gravity = 0.4;
+
+    // solo salta cuando el personaje está en el suelo
+    if (this.y >= this.y0) {
+      this.vy = 1;
+      this.y = this.y0;
+    } else {
+      this.vy += gravity;
+      this.y += this.vy;
     }
-
-
+  }
 }

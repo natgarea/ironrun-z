@@ -2,6 +2,8 @@ var Game = {
   canvas: undefined,
   ctx: undefined,
   fps: 60,
+  
+  
 
   init: function(canvasId) {
     this.canvas = document.getElementById(canvasId);
@@ -11,28 +13,33 @@ var Game = {
   },
 
   start: function() {
+
     this.reset();
 
-    let pause = false;
+    // window.onkeydown = (e) => {
+    //     switch (e.keyCode) {
+    //       // 'esc' to pause
+    //       case 27:
+    //         this.pause = true;
+    //         break;
+    //       // 'enter' to continue
+    //       case 13:
+    //         this.pause = false;
+    //         break;
+    //       case 32:
+    //           this.player.jump();
+    //           break;
+    //     }
+    //   }
 
-    window.onkeydown = function(e) {
-      switch (e.keyCode) {
-        // 'esc' to pause
-        case 27:
-          pause = true;
-          break;
-        // 'enter' to continue
-        case 13:
-          pause = false;
-          break;
-        case 32:
-            this.player.move();
-            break;
-      }
-    };
+    let keyboard = new Keys(this.player)
+    keyboard.setEventListeners()
+    // console.log(this.pause)
 
     this.interval = setInterval(() => {
-      if (pause) return;
+    
+        // console.log(this.pause)
+      if (keyboard.pause) return;
 
       this.clear();
 
@@ -80,8 +87,7 @@ var Game = {
     this.player = new Player(
       this.canvas.width,
       this.canvas.height,
-      this.ctx,
-      this.keys
+      this.ctx
     );
     this.enemyHorde = new Horde([
       new FemaleZombie(
