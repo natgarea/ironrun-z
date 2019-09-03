@@ -41,7 +41,6 @@ class Enemy {
 
             if (framesCounter % 3 === 0) {
                 this.img.frameIndex += 1;
-                console.log(this.img.frameIndex);
             if (this.img.frameIndex >= 10) this.img.frameIndex = 0;
           } }
         }
