@@ -33,7 +33,11 @@ var Game = {
     reset: function() {
         this.background = new Background(this.canvas.width, this.canvas.height, this.ctx);
         this.player = new Player(this.canvas.width, this.canvas.height, this.ctx, this.keys);
-        this.enemy = new Enemy(this.canvas.width, this.canvas.height, this.ctx);
+        this.enemyHorde = new Horde([
+            new FemaleZombie(this.canvas.width, this.canvas.height, this.ctx, 0.00000001, 0.5),
+            new MaleZombie(this.canvas.width, this.canvas.height, this.ctx, 0.07, 0.60),
+            new FemaleZombie(this.canvas.width, this.canvas.height, this.ctx, 0.00000001, 0.7)
+        ]);
         this.framesCounter = 0;
 
     },
@@ -43,7 +47,7 @@ var Game = {
     drawAll: function() {
         this.background.draw();
         this.player.draw(this.framesCounter);
-        this.enemy.draw(this.framesCounter);
+        this.enemyHorde.draw(this.framesCounter);
     },
     moveAll: function() {
         this.background.move();

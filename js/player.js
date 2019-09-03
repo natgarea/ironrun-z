@@ -4,7 +4,7 @@ class Player {
     this.canvasH = h;
     this.ctx = ctx;
     this.keys = keys;
-    this.x = this.canvasW * 0.3;
+    this.x = this.canvasW * 0.35;
     this.y0 = this.canvasH * 0.56;
     this.y = this.y0;
 
@@ -19,8 +19,6 @@ class Player {
 
     this.w = 160;
     this.h = 175;
-
-    this.vy = 1;
 
   }
 
