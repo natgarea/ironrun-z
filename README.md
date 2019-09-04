@@ -6,8 +6,10 @@ Endless running side-scroll game in which a zombie horde follows right after you
 ## Game Credits
 * Background images from [MobileGameGraphics](https://mobilegamegraphics.com/)
 * Sprites from [GameArt2D](https://www.gameart2d.com/)
-* Brain obstacle image from [Max Pixel](https://www.maxpixel.net/Head-Brain-Mind-Gray-Matter-Creativeness-Organ-2970173)
-* GUI-Button Assets from [wonderkidstudio](https://wonderkidstudio.itch.io/gui-button-assets)
+* Brain image from [Max Pixel](https://www.maxpixel.net/Head-Brain-Mind-Gray-Matter-Creativeness-Organ-2970173)
+* GUI-Button Assets by [wonderkidstudio](https://wonderkidstudio.itch.io/gui-button-assets)
+* Dead Font Walking by [Chequered Ink](https://www.fontspace.com/chequered-ink/dead-font-walking)
+* Zombie sounds ("Bite" & "I Want Brains") by [Mike Koenig](http://soundbible.com/tags-zombie.html)
 # About building the game
 In this section, I discuss some aspects about the development process of my first project at Ironhack.
 ## Biggest challenge building the game
