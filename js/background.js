@@ -10,7 +10,7 @@ class Background {
     this.x = 0;
     this.y = 0;
 
-    this.dx = 10;
+    this.dx = 7;
   }
 
   draw() {

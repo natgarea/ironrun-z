@@ -2,8 +2,7 @@ var Game = {
   canvas: undefined,
   ctx: undefined,
   fps: 60,
-  
-  
+  obstacleTimer: 0,
 
   init: function(canvasId) {
     this.canvas = document.getElementById(canvasId);
@@ -13,57 +12,43 @@ var Game = {
   },
 
   start: function() {
-
     this.reset();
 
-    // window.onkeydown = (e) => {
-    //     switch (e.keyCode) {
-    //       // 'esc' to pause
-    //       case 27:
-    //         this.pause = true;
-    //         break;
-    //       // 'enter' to continue
-    //       case 13:
-    //         this.pause = false;
-    //         break;
-    //       case 32:
-    //           this.player.jump();
-    //           break;
-    //     }
-    //   }
-
-    let keyboard = new Keys(this.player)
-    keyboard.setEventListeners()
-    // console.log(this.pause)
+    let keyboard = new Keys(this.player);
+    keyboard.setEventListeners();
 
     this.interval = setInterval(() => {
-    
-        // console.log(this.pause)
       if (keyboard.pause) return;
 
       this.clear();
 
       this.framesCounter++;
       this.timeCounter++;
+      // console.log(this.timeCounter);
 
       if (this.framesCounter > 1000) {
         this.framesCounter = 0;
       }
 
-      // TODO if ()
-      // cambiar el num del que haces modulo
-      // para regular el numero de obstaculos
-      // en base al tiempo que ha transcurrido
-
-      if (this.framesCounter % 50 === 0) {
-        this.generateObstacle();
-      }
+      // let difficulty = d3.scaleLinear().domain([0,max]).range([100,50]);
+      this.obstacleTimer = +this.timer.minutes * 60 + +this.timer.seconds;
+      this.increaseDifficulty(this.obstacleTimer);
 
       this.moveAll();
       this.drawAll();
 
       this.clearObstacles();
     }, 1000 / this.fps);
+  },
+  randomTimer: function(num) {
+    // Calculate
+    // 50 frames must be the minimum to play
+    let max = 30000 / this.fps;
+    let difficulty = d3
+      .scaleLinear()
+      .domain([0, max])
+      .range([100, 50]);
+    return difficulty(num);
   },
   stop: function() {
     clearInterval(this.interval);
@@ -84,11 +69,7 @@ var Game = {
       this.ctx
     );
     this.timer = new Timer(this.canvas.width, this.canvas.height, this.ctx);
-    this.player = new Player(
-      this.canvas.width,
-      this.canvas.height,
-      this.ctx
-    );
+    this.player = new Player(this.canvas.width, this.canvas.height, this.ctx);
     this.enemyHorde = new Horde([
       new FemaleZombie(
         this.canvas.width,
@@ -123,8 +104,29 @@ var Game = {
   },
   generateObstacle: function() {
     this.obstacles.push(
-      new Obstacle(this.canvas.width, this.player.y0, this.player.h, this.ctx)
+      new Brains(this.canvas.width, this.player.y0, this.player.h, this.ctx)
     );
+  },
+  // por pantalla le puedo pasar (timer, tiempoInicial)
+  // en el 1: empieza en 0 segundos, en el 2: con la dificultad a partir de 60
+  increaseDifficulty: function(timer) {
+    if (this.obstacleTimer > 0 && this.obstacleTimer < 10) {
+      if (this.framesCounter % 100 === 0) {
+        this.generateObstacle();
+      }
+    }
+    if (this.obstacleTimer > 10 && this.obstacleTimer < 30) {
+      console.log(this.obstacleTimer);
+      if (this.framesCounter % 80 === 0) {
+        this.generateObstacle();
+      }
+    }
+    if (this.obstacleTimer > 30 && this.obstacleTimer < 60) {
+      console.log(this.obstacleTimer);
+      if (this.framesCounter % 60 === 0) {
+        this.generateObstacle();
+      }
+    }
   },
   clear: function() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -135,7 +137,7 @@ var Game = {
     this.player.draw(this.framesCounter);
     this.enemyHorde.draw(this.framesCounter);
     this.obstacles.forEach(function(obstacle) {
-      obstacle.draw();
+      obstacle.drawStatic();
     });
   },
   moveAll: function() {
