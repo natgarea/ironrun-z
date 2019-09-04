@@ -14,15 +14,9 @@ class Obstacle {
       this.img.frameIndex = 0;
     }
   
-    drawStatic() {
+    draw() {
       this.ctx.drawImage(this.img, this.x, this.y);
-      // this.ctx.fillStyle = "black";
-      // this.ctx.fillRect(this.x, this.y, this.w, this.h);
     }
-
-    // drawAnimation(){
-      
-    // }
   
     move() {
       this.x -= this.dx;

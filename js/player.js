@@ -7,18 +7,22 @@ class Player {
     this.y0 = this.canvasH * 0.56;
     this.y = this.y0;
     this.vy = 1;
+    this.isDead = false;
+
 
     // TODO
     // habría que pasarlo ${character}
     // para que sepa si elige chica o chico
     this.img = new Image();
-    this.img.src = "img/player/female/run.png";
-
+    this.img.src = "img/player/female/run.png"; 
     this.img.frames = 20;
-    this.img.frameIndex = 0;
-
     this.w = 160;
     this.h = 175;
+    
+
+    this.img.frameIndex = 0;
+
+   
   }
 
   draw(framesCounter) {
@@ -43,8 +47,15 @@ class Player {
       this.img.frameIndex += 1;
 
       // Si el frame es el último, se vuelve al primero
-      if (this.img.frameIndex >= 20) this.img.frameIndex = 0;
+      if (this.img.frameIndex >= this.img.frames) this.img.frameIndex = 0;
     }
+  }
+
+  die() {
+    this.img.src = "img/player/female/dead.png";
+    this.img.frames = 30; 
+    this.w = 216;
+    this.h = 180;
   }
 
   jump() {
