@@ -23,7 +23,9 @@ var Game = {
       this.clear();
 
       this.framesCounter++;
+      if (!this.player.isDead) {
       this.timeCounter++;
+      }
 
       if (this.framesCounter > 1000) {
         this.framesCounter = 0;
@@ -121,17 +123,17 @@ var Game = {
   // por pantalla le puedo pasar (timer, tiempoInicial)
   // en el 1: empieza en 0 segundos, en el 2: con la dificultad a partir de 60
   increaseDifficulty: function(timer) {
-    if (this.obstacleTimer > 0 && this.obstacleTimer < 10) {
+    if (timer > 0 && timer < 10 && !this.player.isDead) {
       if (this.framesCounter % 100 === 0) {
         this.generateObstacle();
       }
     }
-    if (this.obstacleTimer > 10 && this.obstacleTimer < 30) {
+    if (timer > 10 && timer < 30 && !this.player.isDead) {
       if (this.framesCounter % 80 === 0) {
         this.generateObstacle();
       }
     }
-    if (this.obstacleTimer > 30 && this.obstacleTimer < 60) {
+    if (timer > 30 && timer < 60 && !this.player.isDead) {
       if (this.framesCounter % 60 === 0) {
         this.generateObstacle();
       }
