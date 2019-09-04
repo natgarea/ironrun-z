@@ -37,10 +37,11 @@ var Game = {
 
       this.clearObstacles();
 
-      if (this.isCollision()) {
-        this.player.isDead = true;
+      this.isCollision();
+      if(this.player.isDead){
+        this.enemyHorde.attack(this.player.x, this.framesCounter);
       }
-
+        // this.player.isDead = true;
     }, 1000 / this.fps);
   },
   stop: function() {
@@ -48,12 +49,16 @@ var Game = {
   },
   // TODO
   gameOver: function() {
-    this.stop();
+    
+    this.player.isDead = true;
+    this.player.die();
+    
+    // this.stop();
 
-    if (confirm("GAME OVER. Play again?")) {
-      this.reset();
-      this.start();
-    }
+    // if (confirm("GAME OVER. Play again?")) {
+    //   this.reset();
+    //   this.start();
+    // }
   },
   reset: function() {
     this.background = new Background(
@@ -92,17 +97,18 @@ var Game = {
   },
   isCollision: function() {
     for (var i = 0; i < this.obstacles.length; i++) {
-      if (this.obstacles[i].x < this.player.x + this.player.w &&
+      if (
+        this.obstacles[i].x < this.player.x + this.player.w &&
         this.obstacles[i].x + this.obstacles[i].w > this.player.x &&
         this.obstacles[i].y < this.player.y + this.player.h &&
-        this.obstacles[i].y + this.obstacles[i].h > this.player.y) {
-          this.player.die();
+        this.obstacles[i].y + this.obstacles[i].h > this.player.y
+      ) {
+        this.gameOver();
       }
     }
   },
   clearObstacles: function() {
-
-    // TODO 
+    // TODO
     this.obstacles = this.obstacles.filter(function(obstacle) {
       return obstacle.x >= 0;
     });
@@ -115,13 +121,13 @@ var Game = {
   // por pantalla le puedo pasar (timer, tiempoInicial)
   // en el 1: empieza en 0 segundos, en el 2: con la dificultad a partir de 60
   increaseDifficulty: function(timer) {
-  if (this.obstacleTimer > 0 && this.obstacleTimer < 10) {
+    if (this.obstacleTimer > 0 && this.obstacleTimer < 10) {
       if (this.framesCounter % 100 === 0) {
         this.generateObstacle();
       }
     }
     if (this.obstacleTimer > 10 && this.obstacleTimer < 30) {
-      if (this.framesCounter % 80 === 0 && !this.player.isDead) {
+      if (this.framesCounter % 80 === 0) {
         this.generateObstacle();
       }
     }
@@ -144,7 +150,7 @@ var Game = {
     });
   },
   moveAll: function() {
-    this.background.move();
+    this.background.move(this.player.isDead);
     this.player.move();
     this.obstacles.forEach(function(obstacle) {
       obstacle.move();

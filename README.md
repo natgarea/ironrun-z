@@ -11,5 +11,6 @@ Endless running side-scroll game in which a zombie horde follows right after you
 In this section, I discuss some aspects about the development process of my first project at Ironhack.
 ## Biggest challenge building the game
 ## Possible improvements for the game
+* Instead of making the player die on collision, everytime the player slips, I would let the zombies attack, then take some of its health points and let it continue running. After several zombie attacks, when the player has health points <= 0 it would die.
 ## Proudest moment building the game
 ## If I started again...
