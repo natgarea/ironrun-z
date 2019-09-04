@@ -1,0 +1,72 @@
+/* * {
+  border-block: border-box;
+}
+
+html {
+    font-size: 10px;
+  }
+
+body {
+    font-size: 2rem;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    color: white;
+    background-color: black;
+}
+
+.widthWarning {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    display: none;
+}
+
+.logoW {
+    max-width: 100%;
+    max-height: auto;
+}
+
+.startScreen, .pauseScreen, .gameOver, .scoreboard {
+    display: none;
+}
+
+button {
+    font-size: 2rem;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    background-color: black;
+    border-radius: 10%;
+}
+
+@media screen and (min-width: 1200px) {
+
+.widthWarning {
+    display: none;
+}
+
+.startScreen {
+    color: black;
+    background-color: white;
+}
+
+.pauseScreen {
+    color: black;
+    background-color: white;
+}
+
+.gameOver {
+    color: black;
+    background-color: white;
+}
+
+.scoreboard {
+    color: black;
+    background-color: white;
+}
+
+} */

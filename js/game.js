@@ -14,7 +14,7 @@ var Game = {
   start: function() {
     this.reset();
 
-    let keyboard = new Keys(this.player);
+    let keyboard = new Controls(this.player);
     keyboard.setEventListeners();
 
     this.interval = setInterval(() => {
@@ -96,6 +96,7 @@ var Game = {
     this.obstacles = [];
     this.framesCounter = 0;
     this.timeCounter = 0;
+    this.scoreboard = [];
   },
   isCollision: function() {
     for (var i = 0; i < this.obstacles.length; i++) {

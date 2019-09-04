@@ -1,4 +1,4 @@
-class Keys {
+class Controls {
     constructor(player) {
         this.pause = false;
         this.player = player;

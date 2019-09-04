@@ -70,7 +70,6 @@ class Horde {
 
     }
     attack(playerPosX, framesCounter) {
-        console.log(framesCounter)
         this.enemies.map(enemy => {
           if(enemy.x < playerPosX) enemy.x += 6 ;
         });
