@@ -39,7 +39,7 @@ class Enemy {
   animateImg(framesCounter) {
     if (framesCounter % 3 === 0) {
       this.img.frameIndex += 1;
-      if (this.img.frameIndex >= 10) this.img.frameIndex = 0;
+      if (this.img.frameIndex >= this.img.frames) this.img.frameIndex = 0;
     }
   }
 }
@@ -72,6 +72,15 @@ class Horde {
     attack(playerPosX, framesCounter) {
         this.enemies.map(enemy => {
           if(enemy.x < playerPosX) enemy.x += 6 ;
+          if(enemy instanceof FemaleZombie) {
+            enemy.img.src = "img/enemy/female/attack.png";
+            enemy.img.frames = 8;
+            enemy.w = 187;
+            enemy.h = 207;
+          }
+          // else if (enemy instanceof MaleZombie) {
+          //   enemy.img.src = "img/enemy/male/attack.png";
+          // }
         });
   }
 

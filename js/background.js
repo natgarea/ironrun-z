@@ -25,11 +25,7 @@ class Background {
     }
   }
 }
-
-  // class Screen extends Background {
-
-  // }
-
+ 
 class City extends Background {
   constructor(w, h, ctx) {
     super(w, h, ctx, img, x, y, dx);

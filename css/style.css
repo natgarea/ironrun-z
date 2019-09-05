@@ -1,4 +1,4 @@
-/* * {
+* {
   border-block: border-box;
 }
 
@@ -14,24 +14,9 @@ body {
     background-color: black;
 }
 
-.widthWarning {
-    display: block;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-canvas {
-    display: none;
-}
-
 .logoW {
     max-width: 100%;
     max-height: auto;
-}
-
-.startScreen, .pauseScreen, .gameOver, .scoreboard {
-    display: none;
 }
 
 button {
@@ -48,12 +33,6 @@ input {
     font-size: 2rem;
     text-align: center;
     font-family: 'Courier New', Courier, monospace;
-}
-
-@media screen and (min-width: 1200px) {
-
-.widthWarning {
-    display: none;
 }
 
 .startScreen {
@@ -84,4 +63,3 @@ input {
     width: 894px;
 }
 
-} */
