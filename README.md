@@ -11,7 +11,7 @@ Endless running side-scroll game in which a zombie horde follows right after you
 * Brain image from [Max Pixel](https://www.maxpixel.net/Head-Brain-Mind-Gray-Matter-Creativeness-Organ-2970173)
 * GUI-Button Assets by [wonderkidstudio](https://wonderkidstudio.itch.io/gui-button-assets)
 * Dead Font Walking by [Chequered Ink](https://www.fontspace.com/chequered-ink/dead-font-walking)
-* Zombie sounds ("Bite" & "I Want Brains") by [Mike Koenig](http://soundbible.com/tags-zombie.html)
+* Zombie sounds by [Mike Koenig](http://soundbible.com/tags-zombie.html)
 # About building the game
 In this section, I discuss some aspects about the development process of my first project at Ironhack.
 ## Biggest challenge building the game
