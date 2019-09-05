@@ -26,23 +26,27 @@ class Background {
   }
 }
 
-// class City extends Background {
-//   constructor(w, h, ctx) {
-//     super(w, h, ctx, img, x, y, dx);
-//     this.img.src = "img/bg_city.png";
-//   }
-// }
+  // class Screen extends Background {
 
-// class Forest extends Background {
-//   constructor(w, h, ctx) {
-//     super(w, h, ctx, img, x, y, dx);
-//     this.img.src = "img/bg_forest.png";
-//   }
-// }
+  // }
 
-// class Dark extends Background {
-//   constructor(w, h, ctx) {
-//     super(w, h, ctx, img, x, y, dx);
-//     this.img.src = "img/bg_dark.png";
-//   }
-// }
+class City extends Background {
+  constructor(w, h, ctx) {
+    super(w, h, ctx, img, x, y, dx);
+    this.img.src = "img/bg_city.png";
+  }
+}
+
+class Forest extends Background {
+  constructor(w, h, ctx) {
+    super(w, h, ctx, img, x, y, dx);
+    this.img.src = "img/bg_forest.png";
+  }
+}
+
+class Dark extends Background {
+  constructor(w, h, ctx) {
+    super(w, h, ctx, img, x, y, dx);
+    this.img.src = "img/bg_dark.png";
+  }
+}

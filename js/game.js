@@ -32,18 +32,18 @@ var Game = {
       }
 
       this.obstacleTimer = +this.timer.minutes * 60 + +this.timer.seconds;
-      this.increaseDifficulty(this.obstacleTimer);
+      this.gameRythm(this.obstacleTimer);
 
       this.moveAll();
       this.drawAll();
 
       this.clearObstacles();
 
-      this.isCollision();
+      this.isPlayerCollision();
+      this.isZombieCollision();
       if(this.player.isDead){
         this.enemyHorde.attack(this.player.x, this.framesCounter);
       }
-        // this.player.isDead = true;
     }, 1000 / this.fps);
   },
   stop: function() {
@@ -54,6 +54,7 @@ var Game = {
     
     this.player.isDead = true;
     this.player.die();
+    this.zombieTalk.play();
     
     // this.stop();
 
@@ -97,8 +98,10 @@ var Game = {
     this.framesCounter = 0;
     this.timeCounter = 0;
     this.scoreboard = [];
+    this.zombieBite = new Bite();
+    this.zombieTalk = new Talk();
   },
-  isCollision: function() {
+  isPlayerCollision: function() {
     for (var i = 0; i < this.obstacles.length; i++) {
       if (
         this.obstacles[i].x < this.player.x + this.player.w &&
@@ -106,7 +109,21 @@ var Game = {
         this.obstacles[i].y < this.player.y + this.player.h &&
         this.obstacles[i].y + this.obstacles[i].h > this.player.y
       ) {
+        this.obstacles.splice(i,1);
         this.gameOver();
+      }
+    }
+  },
+  isZombieCollision: function() {
+    for (var i = 0; i < this.obstacles.length; i++) {
+      if (
+        this.obstacles[i].x < this.enemyHorde.enemies[2].x + this.enemyHorde.enemies[2].w &&
+        this.obstacles[i].x + this.enemyHorde.enemies[2].w > this.enemyHorde.enemies[2].x &&
+        this.obstacles[i].y < this.enemyHorde.enemies[2].y + this.enemyHorde.enemies[2].h &&
+        this.obstacles[i].y + this.enemyHorde.enemies[2].h > this.enemyHorde.enemies[2].y
+      && !this.player.isDead) {
+        this.zombieBite.play();
+        this.obstacles.splice(i,1);
       }
     }
   },
@@ -123,19 +140,19 @@ var Game = {
   },
   // por pantalla le puedo pasar (timer, tiempoInicial)
   // en el 1: empieza en 0 segundos, en el 2: con la dificultad a partir de 60
-  increaseDifficulty: function(timer) {
-    if (timer > 0 && timer < 10 && !this.player.isDead) {
+  gameRythm: function(timer) {
+    if (timer > 0 && timer <= 10 && !this.player.isDead) {
       if (this.framesCounter % 100 === 0) {
         this.generateObstacle();
       }
     }
-    if (timer > 10 && timer < 30 && !this.player.isDead) {
-      if (this.framesCounter % 80 === 0) {
+    if (timer > 10 && timer <= 30 && !this.player.isDead) {
+      if (this.framesCounter % 50 === 0) {
         this.generateObstacle();
       }
     }
-    if (timer > 30 && timer < 60 && !this.player.isDead) {
-      if (this.framesCounter % 60 === 0) {
+    if (timer > 30 && timer <= 100 && !this.player.isDead) {
+      if (this.framesCounter % 100 === 0) {
         this.generateObstacle();
       }
     }

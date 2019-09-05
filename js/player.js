@@ -56,7 +56,7 @@ class Player {
   }
 
   jump() {
-    if (this.y == this.y0) {
+    if (this.y == this.y0 && !this.isDead) {
       this.y -= 5;
       this.vy -= 10;
     }

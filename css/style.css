@@ -15,6 +15,7 @@ body {
 }
 
 .widthWarning {
+    display: block;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,6 +44,12 @@ button {
     border-radius: 10%;
 }
 
+input {
+    font-size: 2rem;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
 @media screen and (min-width: 1200px) {
 
 .widthWarning {
@@ -52,21 +59,29 @@ button {
 .startScreen {
     color: black;
     background-color: white;
+    height: 512px;
+    width: 894px;
 }
 
 .pauseScreen {
     color: black;
     background-color: white;
+    height: 512px;
+    width: 894px;
 }
 
 .gameOver {
     color: black;
     background-color: white;
+    height: 512px;
+    width: 894px;
 }
 
 .scoreboard {
     color: black;
     background-color: white;
+    height: 512px;
+    width: 894px;
 }
 
 } */

@@ -6,7 +6,7 @@ class Obstacle {
       this.h = this.w * 3;
       this.dx = 10;
       this.x = w;
-      this.y = playerY + playerH - this.h - 20;
+      this.y = playerY + playerH - this.h - 8;
 
       this.img = new Image();
       this.img.src = imgSrc;
@@ -27,4 +27,8 @@ class Obstacle {
     constructor(w, playerY, playerH, ctx) { 
     super(w, playerY, playerH, ctx,"img/obstacle/brain.png")
     };
+
+    disappear() {
+      
+    }
   }
