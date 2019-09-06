@@ -1,5 +1,3 @@
 window.onload = function() {
-  
-    Game.init("canvas");
-  };
-
+  Game.init("canvas");
+};

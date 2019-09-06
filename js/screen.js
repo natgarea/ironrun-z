@@ -5,35 +5,45 @@ class Screen {
 
     this.w = w;
     this.h = h;
-
   }
 
   draw() {
-    this.ctx.drawImage(this.img, this.w/7, this.h/5, this.img.width, this.img.height);
+    this.ctx.drawImage(
+      this.img,
+      this.w / 7,
+      this.h / 5,
+      this.img.width,
+      this.img.height
+    );
   }
-
 }
 
 class StartScreen extends Screen {
-    constructor(w, h, ctx) {
-        super(w, h, ctx);
-        this.img.src = "./img/startScreen.png";
-    }
+  constructor(w, h, ctx) {
+    super(w, h, ctx);
+    this.img.src = "./img/startScreen.png";
+  }
 }
 
 class GameOver extends Screen {
-    constructor(w, h, ctx) {
-        super(w, h, ctx);
-        this.img.src = "./img/gameOver.png";
-    }
+  constructor(w, h, ctx) {
+    super(w, h, ctx);
+    this.img.src = "./img/gameOver.png";
+  }
 }
 
 class PauseScreen extends Screen {
-    constructor(w, h, ctx) {
-        super(w, h, ctx);
-        this.img.src = "./img/pauseMode.png";
-    }
-    draw() {
-        this.ctx.drawImage(this.img, this.w/4, this.h/5, this.img.width, this.img.height);
-      }
+  constructor(w, h, ctx) {
+    super(w, h, ctx);
+    this.img.src = "./img/pauseMode.png";
+  }
+  draw() {
+    this.ctx.drawImage(
+      this.img,
+      this.w / 4,
+      this.h / 5,
+      this.img.width,
+      this.img.height
+    );
+  }
 }

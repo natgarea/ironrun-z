@@ -9,9 +9,6 @@ class Player {
     this.vy = 1;
     this.isDead = false;
 
-    // TODO
-    // habría que pasarlo ${character}
-    // para que sepa si elige chica o chico
     this.img = new Image();
     this.img.src = "img/player/female/run.png";
     this.img.frames = 20;
@@ -37,10 +34,9 @@ class Player {
   }
 
   animateImg(framesCounter) {
-
     if (framesCounter % 3 === 0) {
-      if (this.img.frameIndex === this.img.frames-1 && this.isDead) {
-        this.img.frameIndex = this.img.frames-1;
+      if (this.img.frameIndex === this.img.frames - 1 && this.isDead) {
+        this.img.frameIndex = this.img.frames - 1;
       } else {
         this.img.frameIndex += 1;
         if (this.img.frameIndex >= this.img.frames) this.img.frameIndex = 0;
@@ -63,10 +59,8 @@ class Player {
   }
 
   move() {
-    // Aumenta la velocidad en el eje y.
     var gravity = 0.4;
 
-    // solo salta cuando el personaje está en el suelo
     if (this.y >= this.y0) {
       this.vy = 1;
       this.y = this.y0;

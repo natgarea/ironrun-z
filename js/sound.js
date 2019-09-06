@@ -7,13 +7,13 @@ class Sound {
   }
 }
 class Bite extends Sound {
-    constructor() {
-        super("./sound/zombie_bite.mp3");
-    }
+  constructor() {
+    super("./sound/zombie_bite.mp3");
+  }
 }
 
 class Talk extends Sound {
-    constructor() {
-      super("./sound/zombie_talk.mp3"); 
-    };
+  constructor() {
+    super("./sound/zombie_talk.mp3");
+  }
 }

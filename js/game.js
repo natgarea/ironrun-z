@@ -11,8 +11,7 @@ var Game = {
     this.ctx = this.canvas.getContext("2d");
 
     this.start();
-    this.canvas.onclick = () => this.startGame = true;
-    
+    this.canvas.onclick = () => (this.startGame = true);
   },
   start: function() {
     this.reset();
@@ -22,8 +21,8 @@ var Game = {
     this.interval = setInterval(() => {
       if (this.keyboard.pause) {
         this.pauseScr.draw();
-        return
-      };
+        return;
+      }
 
       this.clear();
 
@@ -60,12 +59,12 @@ var Game = {
     this.player.isDead = true;
     this.player.die();
     this.zombieTalk.play();
-    setTimeout(()=>{
-        this.stop();
-        this.ctx.fillStyle = "black";
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        this.gameOverScr.draw();
-    },2000)
+    setTimeout(() => {
+      this.stop();
+      this.ctx.fillStyle = "black";
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      this.gameOverScr.draw();
+    }, 2000);
   },
   reset: function() {
     this.startScr = new StartScreen(

@@ -1,7 +1,5 @@
 class Enemy {
   constructor(w, h, ctx, initialX, initialY, imageSrc) {
-    // puedo llamar fuera a canvasW y canvasH?
-    // ctx tiene que estar en todos lados?
     this.canvasW = w;
     this.canvasH = h;
     this.ctx = ctx;
@@ -9,7 +7,6 @@ class Enemy {
     this.y0 = this.canvasH * initialY;
     this.y = this.y0;
 
-    // TODO change for subclass
     this.img = new Image();
     this.img.src = imageSrc;
 
@@ -66,22 +63,16 @@ class Horde {
 
   animateImg(framesCounter) {
     this.enemies.forEach(enemy => enemy.animateImg(framesCounter));
-
-
-    }
-    attack(playerPosX, framesCounter) {
-        this.enemies.map(enemy => {
-          if(enemy.x < playerPosX) enemy.x += 6 ;
-          if(enemy instanceof FemaleZombie) {
-            enemy.img.src = "img/enemy/female/attack.png";
-            enemy.img.frames = 8;
-            enemy.w = 187;
-            enemy.h = 207;
-          }
-          // else if (enemy instanceof MaleZombie) {
-          //   enemy.img.src = "img/enemy/male/attack.png";
-          // }
-        });
   }
-
+  attack(playerPosX, framesCounter) {
+    this.enemies.map(enemy => {
+      if (enemy.x < playerPosX) enemy.x += 6;
+      if (enemy instanceof FemaleZombie) {
+        enemy.img.src = "img/enemy/female/attack.png";
+        enemy.img.frames = 8;
+        enemy.w = 187;
+        enemy.h = 207;
+      }
+    });
+  }
 }
