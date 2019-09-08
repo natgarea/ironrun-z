@@ -1,17 +1,16 @@
 class Screen {
-  constructor(w, h, ctx) {
-    this.ctx = ctx;
+  constructor(canvasWidth, canvasHeight) {
     this.img = new Image();
 
-    this.w = w;
-    this.h = h;
+    this.canvasWidth = canvasWidth;
+    this.canvasHeight = canvasHeight;
   }
 
-  draw() {
-    this.ctx.drawImage(
+  draw(ctx) {
+    ctx.drawImage(
       this.img,
-      this.w / 7,
-      this.h / 5,
+      this.canvasWidth / 7,
+      this.canvasHeight / 5,
       this.img.width,
       this.img.height
     );
@@ -19,26 +18,33 @@ class Screen {
 }
 
 class StartScreen extends Screen {
-  constructor(w, h, ctx) {
-    super(w, h, ctx);
+  constructor(canvasWidth, canvasHeight) {
+    super(canvasWidth, canvasHeight);
     this.img.src = "./img/startScreen.png";
   }
 }
 
 class GameOver extends Screen {
-  constructor(w, h, ctx) {
-    super(w, h, ctx);
+  constructor(canvasWidth, canvasHeight) {
+    super(canvasWidth, canvasHeight);
+    this.width = canvasWidth;
+    this.height = canvasHeight;
     this.img.src = "./img/gameOver.png";
+  }
+  draw(ctx) {
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, this.width, this.height);
+    super.draw(ctx);
   }
 }
 
 class PauseScreen extends Screen {
-  constructor(w, h, ctx) {
-    super(w, h, ctx);
+  constructor(canvasWidth, canvasHeight) {
+    super(canvasWidth, canvasHeight);
     this.img.src = "./img/pauseMode.png";
   }
-  draw() {
-    this.ctx.drawImage(
+  draw(ctx) {
+    ctx.drawImage(
       this.img,
       this.w / 4,
       this.h / 5,

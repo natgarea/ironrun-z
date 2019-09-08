@@ -45,6 +45,7 @@ class Player {
   }
 
   die() {
+    this.isDead = true;
     this.img.src = "img/player/female/dead.png";
     this.img.frames = 30;
     this.w = 216;

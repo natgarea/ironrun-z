@@ -1,10 +1,7 @@
 class Enemy {
-  constructor(w, h, ctx, initialX, initialY, imageSrc) {
-    this.canvasW = w;
-    this.canvasH = h;
-    this.ctx = ctx;
-    this.x = this.canvasW * initialX;
-    this.y0 = this.canvasH * initialY;
+  constructor(canvasWidth, canvasHeight, initialX, initialY, imageSrc) {
+    this.x = canvasWidth * initialX;
+    this.y0 = canvasHeight * initialY;
     this.y = this.y0;
 
     this.img = new Image();
@@ -17,8 +14,8 @@ class Enemy {
     this.h = 210;
   }
 
-  draw(framesCounter) {
-    this.ctx.drawImage(
+  draw(framesCounter, ctx) {
+    ctx.drawImage(
       this.img,
       this.img.frameIndex * Math.floor(this.img.width / this.img.frames),
       0,
@@ -42,37 +39,12 @@ class Enemy {
 }
 
 class FemaleZombie extends Enemy {
-  constructor(w, h, ctx, initialX, initialY) {
-    super(w, h, ctx, initialX, initialY, "img/enemy/female/walk.png");
+  constructor(canvasWidth, canvasHeight, initialX, initialY) {
+    super(canvasWidth, canvasHeight, initialX, initialY, "img/enemy/female/walk.png");
   }
 }
 class MaleZombie extends Enemy {
-  constructor(w, h, ctx, initialX, initialY) {
-    super(w, h, ctx, initialX, initialY, "img/enemy/male/walk.png");
-  }
-}
-
-class Horde {
-  constructor(enemies) {
-    this.enemies = enemies;
-  }
-
-  draw(framesCounter) {
-    this.enemies.forEach(enemy => enemy.draw(framesCounter));
-  }
-
-  animateImg(framesCounter) {
-    this.enemies.forEach(enemy => enemy.animateImg(framesCounter));
-  }
-  attack(playerPosX, framesCounter) {
-    this.enemies.map(enemy => {
-      if (enemy.x < playerPosX) enemy.x += 6;
-      if (enemy instanceof FemaleZombie) {
-        enemy.img.src = "img/enemy/female/attack.png";
-        enemy.img.frames = 8;
-        enemy.w = 187;
-        enemy.h = 207;
-      }
-    });
+  constructor(canvasWidth, canvasHeight, initialX, initialY) {
+    super(canvasWidth, canvasHeight, initialX, initialY, "img/enemy/male/walk.png");
   }
 }

@@ -3,7 +3,7 @@ var Game = {
   ctx: undefined,
   fps: 60,
   obstacleTimer: 0,
-  startGame: false,
+  gameStarted: false,
   lostGame: false,
 
   init: function(canvasId) {
@@ -11,7 +11,7 @@ var Game = {
     this.ctx = this.canvas.getContext("2d");
 
     this.start();
-    this.canvas.onclick = () => (this.startGame = true);
+    this.canvas.onclick = () => (this.gameStarted = true);
   },
   start: function() {
     this.reset();
@@ -20,7 +20,7 @@ var Game = {
 
     this.interval = setInterval(() => {
       if (this.keyboard.pause) {
-        this.pauseScr.draw();
+        this.pauseScr.draw(this.ctx);
         return;
       }
 
@@ -35,7 +35,7 @@ var Game = {
         this.framesCounter = 0;
       }
 
-      if (this.startGame) {
+      if (this.gameStarted) {
         this.obstacleTimer = +this.timer.minutes * 60 + +this.timer.seconds;
         this.gameRythm(this.obstacleTimer);
 
@@ -44,38 +44,35 @@ var Game = {
 
         this.clearObstacles();
 
-        this.isPlayerCollision();
-        this.isZombieCollision();
+        isPlayerCollision(this.obstacles, this.player, this);
+        isZombieCollision(this.obstacles, this.enemyHorde, this.player);
         if (this.player.isDead) {
-          this.enemyHorde.attack(this.player.x, this.framesCounter);
+          this.enemyHorde.attack(this.player.x);
         }
-      } else this.startScr.draw();
+      } else {
+        this.startScr.draw(this.ctx);
+      }
     }, 1000 / this.fps);
   },
   stop: function() {
     clearInterval(this.interval);
   },
   gameOver: function() {
-    this.player.isDead = true;
     this.player.die();
     this.zombieTalk.play();
     setTimeout(() => {
       this.stop();
-      this.ctx.fillStyle = "black";
-      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-      this.gameOverScr.draw();
+      this.gameOverScr.draw(this.ctx);
     }, 2000);
   },
   reset: function() {
     this.startScr = new StartScreen(
       this.canvas.width,
-      this.canvas.height,
-      this.ctx
+      this.canvas.height
     );
-    this.background = new Background(
+    this.background = new City(
       this.canvas.width,
-      this.canvas.height,
-      this.ctx
+      this.canvas.height
     );
     this.timer = new Timer(this.canvas.width, this.canvas.height, this.ctx);
     this.player = new Player(this.canvas.width, this.canvas.height, this.ctx);
@@ -84,21 +81,18 @@ var Game = {
       new FemaleZombie(
         this.canvas.width,
         this.canvas.height,
-        this.ctx,
         0.00000001,
         0.5
       ),
       new MaleZombie(
         this.canvas.width,
         this.canvas.height,
-        this.ctx,
         0.07,
         0.6
       ),
       new FemaleZombie(
         this.canvas.width,
         this.canvas.height,
-        this.ctx,
         0.00000001,
         0.7
       )
@@ -106,50 +100,15 @@ var Game = {
     this.obstacles = [];
     this.framesCounter = 0;
     this.timeCounter = 0;
-
-    this.zombieBite = new Bite();
     this.zombieTalk = new Talk();
     this.gameOverScr = new GameOver(
       this.canvas.width,
       this.canvas.height,
-      this.ctx
     );
     this.pauseScr = new PauseScreen(
       this.canvas.width,
       this.canvas.height,
-      this.ctx
     );
-  },
-  isPlayerCollision: function() {
-    for (var i = 0; i < this.obstacles.length; i++) {
-      if (
-        this.obstacles[i].x < this.player.x + this.player.w &&
-        this.obstacles[i].x + this.obstacles[i].w > this.player.x &&
-        this.obstacles[i].y < this.player.y + this.player.h &&
-        this.obstacles[i].y + this.obstacles[i].h > this.player.y
-      ) {
-        this.obstacles.splice(i, 1);
-        this.gameOver();
-      }
-    }
-  },
-  isZombieCollision: function() {
-    for (var i = 0; i < this.obstacles.length; i++) {
-      if (
-        this.obstacles[i].x <
-          this.enemyHorde.enemies[2].x + this.enemyHorde.enemies[2].w &&
-        this.obstacles[i].x + this.enemyHorde.enemies[2].w >
-          this.enemyHorde.enemies[2].x &&
-        this.obstacles[i].y <
-          this.enemyHorde.enemies[2].y + this.enemyHorde.enemies[2].h &&
-        this.obstacles[i].y + this.enemyHorde.enemies[2].h >
-          this.enemyHorde.enemies[2].y &&
-        !this.player.isDead
-      ) {
-        this.zombieBite.play();
-        this.obstacles.splice(i, 1);
-      }
-    }
   },
   clearObstacles: function() {
     this.obstacles = this.obstacles.filter(function(obstacle) {
@@ -182,10 +141,10 @@ var Game = {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   },
   drawAll: function() {
-    this.background.draw();
+    this.background.draw(this.ctx);
     this.timer.draw(this.timeCounter);
     this.player.draw(this.framesCounter);
-    this.enemyHorde.draw(this.framesCounter);
+    this.enemyHorde.draw(this.framesCounter, this.ctx);
     this.obstacles.forEach(function(obstacle) {
       obstacle.draw();
     });
